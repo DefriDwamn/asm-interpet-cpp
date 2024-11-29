@@ -15,7 +15,7 @@ void Interpreter::run(const std::string &binary_file,
     throw UVMException("Cannot open binary file: " + binary_file);
 
   std::vector<int32_t> memory(1024, 0);
-  uint32_t accumulator = 0;
+  int32_t accumulator = 0;
 
   while (binary.peek() != EOF) {
     uint8_t opcode;
@@ -23,7 +23,7 @@ void Interpreter::run(const std::string &binary_file,
 
     switch (static_cast<OpCode>(opcode)) {
     case OpCode::LOAD_CONST: {
-      uint32_t value;
+      int32_t value;
       binary.read(reinterpret_cast<char *>(&value), sizeof(value));
       accumulator = value;
       break;
